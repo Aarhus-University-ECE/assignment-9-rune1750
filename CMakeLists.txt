@@ -28,7 +28,7 @@ add_library(mymath src/search.c src/dfs.c src/sum.c)
 target_include_directories(mymath PUBLIC include)
 
 # define executable named main for experimenting and debugging code
-add_executable(main src/main.cpp)
+add_executable(main src/main.c)
 target_link_libraries(main mymath)
 
 # tests are added by declaring a target, in this case 'tests'. additional tests
