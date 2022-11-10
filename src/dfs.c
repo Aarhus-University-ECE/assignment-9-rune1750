@@ -6,6 +6,8 @@
 #include <stdlib.h>  /* abort */
 #include <stdbool.h> /* bool, true, false */
 #include "dfs.h"
+#include <assert.h>
+#include <stddef.h>
 
 void DFT(Bnode *root)
 {
@@ -20,6 +22,10 @@ void DFT(Bnode *root)
   while (!isEmpty(post_search))
   {
     Bnode *head = pop(post_search);
+
+    assert(head != NULL);
+
+    printf("node: %2d\n", head->num);
 
     if (head->rchild != NULL)
     {
@@ -75,15 +81,13 @@ void print_tree(Bnode *p, int depth)
 }
 */
 
-void push(stack *topp, Bnode *node)
+void push(stack *topp, Bnode *n)
 {
-  struct node *card = (struct node *)malloc(sizeof(node));
-  card->data = topp;
+  struct node *card = (struct node *)malloc(sizeof(struct node));
+  card->data = n;
   card->next = topp->top;
-  topp->top = node;
-  return;
+  topp->top = card;
 }
-
 
 bool isEmpty(stack *topp)
 // Checks if the stacks is empty
@@ -109,11 +113,11 @@ Bnode *pop(stack *topp)
   if (topp->top == NULL)
   {
     printf(" the stack is empty!!");
-    return -1;
+    return NULL;
   }
   // the place-holder is assigned the value of the data top of the stack
   // the top of the stack is assigned the value of its own next, which is index of the previous card-element.
-  int top_data = topp->top->data;
+  Bnode* top_data = topp->top->data;
   node *freeer = topp->top; /* Node for freeing the top element */
   topp->top = topp->top->next;
 

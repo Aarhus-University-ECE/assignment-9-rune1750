@@ -6,25 +6,25 @@ set(CMAKE_CXX_STANDARD 14)
 
 # static checks
 # if(MSVC)
-#   add_compile_options(/W4 /WX)
+# add_compile_options(/W4 /WX)
 # else()
-#   add_compile_options(-Wall -Wextra -pedantic -Werror)
+# add_compile_options(-Wall -Wextra -pedantic -Werror)
 # endif()
 
 # set(CMAKE_CXX_CLANG_TIDY
-#   clang-tidy;
-#   -checks=*;
+# clang-tidy;
+# -checks=*;
 # )
 
 # set(CMAKE_CXX_CPPCHECK
-#   cppcheck;
-#   --error-exitcode=1;
+# cppcheck;
+# --error-exitcode=1;
 # )
-
 
 # define library called queue that can imported into other targets via
 # 'target_link_libraries'
 add_library(mymath src/search.c src/dfs.c src/sum.c)
+target_compile_options(mymath PUBLIC -g -O0)
 target_include_directories(mymath PUBLIC include)
 
 # define executable named main for experimenting and debugging code
@@ -36,4 +36,3 @@ target_link_libraries(main mymath)
 # target via 'add_executable'
 enable_testing()
 add_subdirectory(tests)
-
